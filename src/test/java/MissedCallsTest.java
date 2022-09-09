@@ -3,25 +3,31 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class MissedCallsTest {
-    private MissedCalls mc;
+    private MissedCalls sut;
 
     @BeforeEach
     public void generateData() {
-        mc = new MissedCalls();
+        sut = new MissedCalls();
     }
 
     @Test
     public void testAddMissedCall() {
+        // arrange
         String phone = "+777";
-        MissedCalls mc = new MissedCalls();
-        mc.addMissedCall(phone);
-        Assertions.assertTrue(mc.hasMissedCallFromPhone(phone));
+
+        // act
+        sut.addMissedCall(phone);
+
+        // assert
+        Assertions.assertTrue(sut.hasMissedCallFromPhone(phone));
     }
 
     @Test
     public void testNotExistingMissedCall() {
-        MissedCalls mc = new MissedCalls();
-        boolean hasMissedCall = mc.hasMissedCallFromPhone("-1");
+        // act
+        boolean hasMissedCall = sut.hasMissedCallFromPhone("-1");
+
+        // assert
         Assertions.assertNull(hasMissedCall ? hasMissedCall : null);
     }
 }

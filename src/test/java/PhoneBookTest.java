@@ -3,28 +3,33 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class PhoneBookTest {
-    private Phonebook pb;
+    private Phonebook sut;
 
     @BeforeEach
     public void generateData() {
-        pb = new Phonebook("test phonebook");
+        sut = new Phonebook("test phonebook");
     }
 
     @Test
     public void testGetExistingContact() {
+        // arrange
         String phone = "+798651474";
         Contact test1 = new Contact("test", phone);
-        Phonebook pb = new Phonebook("test phonebook");
 
-        pb.addContact(test1);
+        // act
+        sut.addContact(test1);
+        Contact result = sut.getContactByPhone(phone);
 
-        Assertions.assertEquals(test1, pb.getContactByPhone(phone));
+        // assert
+        Assertions.assertEquals(test1, result);
     }
 
     @Test
     public void testGetMissingContact() {
-        Phonebook pb = new Phonebook("test phonebook");
-        Contact c = pb.getContactByPhone("-1");
+        // act
+        Contact c = sut.getContactByPhone("-1");
+
+        // assert
         Assertions.assertNull(c);
     }
 }
